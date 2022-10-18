@@ -29,20 +29,15 @@ router.get('/movies',function (req, res){
 /////////////////////////////////////////////( no 02)///////////////////////////////////////////////////
 
 router.get('/movies/:indexNumber' ,function(req, res){
-    let nee=req.params
-    let movieNM=Movies[nee.indexNumber]
+    let nee=req.params.indexNumber
+    let movieNM=Movies[nee]
     console.log('movies index is :',nee.indexNumber)
+    if(movieNM<0 || movieNM>=Movies.length){
+        return res.send('The index value is not correct, please check the it')
+    }
     res.send(movieNM)
 })
 
-router.get('/movie/:indexNumber' ,function(req, res){
-    let tow=req.params.indexNumber
-    if(tow>=Movies.length){
-        res.send ('user to use a valid index')
-    }
-    
-
-})
 
 ///////////////////////////////////////(n0 04)////////////////////////////////////////
 
@@ -74,12 +69,12 @@ for (let index = 0; index < varr.length; index++) {
     const element = varr[index];
     if(element.id==abc){
         // console.log(element
-        let now=element
+        return res.send(element)
         
     }
     
     }
-    res.send(now)
+    res.send("The film id doesnt match any movie")
     
 })
 
