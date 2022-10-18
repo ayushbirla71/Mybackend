@@ -37,20 +37,10 @@ router.get('/test-me', function (req, res) {
     //B). 10 odd numbers. Using the tail function, using "tail"
 
   
-    const xxx=[1,3,5,7,9,11,13,15,17,19]
+    const oddNum=[1,3,5,7,9,11,13,15,17,19]
    
-    console.log(_tail(xxx, 9))
+    console.log(_tail(oddNum, 9))
 
-//     tailN(xxx, 9)
-//   .then(lines => console.log(lines))
-
-    // const abbcd=tail(abcd,last(9))
-    // console.log(abbcd);
-    
-
-    // tail.on(abcd, (data) => {
-    //     console.log(data)  
-    //   })
 
 
 
