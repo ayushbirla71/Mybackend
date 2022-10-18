@@ -15,6 +15,76 @@ router.get('/students', function (req, res){
 })
 
 
+////////////////////////////////////////(no 01)////////////////////////////////////////////////////
+
+
+let Movies =['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+
+router.get('/movies',function (req, res){
+    console.log("The path params in the request are : ", req.params)
+    
+
+    res.send(Movies)
+})
+/////////////////////////////////////////////( no 02)///////////////////////////////////////////////////
+
+router.get('/movies/:indexNumber' ,function(req, res){
+    let nee=req.params
+    let movieNM=Movies[nee.indexNumber]
+    console.log('movies index is :',nee.indexNumber)
+    res.send(movieNM)
+})
+
+router.get('/movie/:indexNumber' ,function(req, res){
+    let tow=req.params.indexNumber
+    if(tow>=Movies.length){
+        res.send ('user to use a valid index')
+    }
+    
+
+})
+
+///////////////////////////////////////(n0 04)////////////////////////////////////////
+
+let varr=[ {
+    id: 1,
+    name: 'The Shining'
+   }, {
+    id: 2,
+    name: 'Incendies'
+   }, {
+    id: 3,
+    name: 'Rang de Basanti'
+   }, {
+    id: 4,
+    name: 'Finding Nemo'
+   }]
+router.get('/films',function(req, res){
+    
+    
+    res.send(varr)
+       
+    
+})
+
+////////////////////////////////////////////(no 05)////////////////////////////////////////////////////////////
+router.get('/films/:filmId',function(req, res){
+let abc=req.params.filmId
+for (let index = 0; index < varr.length; index++) {
+    const element = varr[index];
+    if(element.id==abc){
+        // console.log(element
+        let now=element
+        
+    }
+    
+    }
+    res.send(now)
+    
+})
+
+
+
 // Example 1 for path params
 router.get('/students/:studentName', function(req, res){
     // ':' denotes that the following part of route is a variable
