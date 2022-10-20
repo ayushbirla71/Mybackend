@@ -65,7 +65,7 @@ res.send({playerObject , status: true})
     
 
     router.post("/sol2", function(req, res){
-        let input =[22,23,24,25,26,28]
+        let input =[22,23,24,25,27,28]
         let N = input.length+1
         let first = input[0]
         let last =input[input.length-1]
