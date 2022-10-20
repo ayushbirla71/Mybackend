@@ -1,6 +1,68 @@
 const express = require('express');
 const router = express.Router();
 
+///////////////////////////////////(assignment)///////////////////////////////////////
+
+
+router.post("/name", function(req, res){
+    res.send("hello my name is ayush")
+})
+
+
+let persons= [
+   {
+   name: "PK",
+   age: 10,
+   votingStatus: false
+},
+{
+   name: "SK",
+   age: 20,
+   votingStatus: false
+},
+{
+   name: "AA",
+   age: 70,
+   votingStatus: false
+},
+{
+   name: "SC",
+   age: 5,
+   votingStatus: false
+},
+{
+   name: "HO",
+   age: 40,
+   votingStatus: false
+}
+]
+router.post('/person',function(req, res){
+    let input=req.query.input
+
+    let finalResult=[]
+   
+    for (let i = 0; i < persons.length; i++) {
+        const element = persons[i];
+        if(persons[i].age>=input){
+
+         persons[i].votingStatus=true
+
+      
+
+        finalResult.push(persons[i])
+
+        }
+        
+    }
+    console.log(input)
+    res.send(finalResult)
+
+})
+
+
+
+///////////////////////////////////(End)//////////////////////////////////////////////
+
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
