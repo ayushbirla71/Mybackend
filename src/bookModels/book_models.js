@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-const UserScheme=new mongoose.Schema(
+const BookScheme=new mongoose.Schema(
     {bookName:{type :String,
         required: true},
     authorName:String,
@@ -10,4 +10,4 @@ const UserScheme=new mongoose.Schema(
 {timestamps:true}
 );
 
-module.exports=mongoose.model('user', UserScheme)
+module.exports=mongoose.model('book', BookScheme)
