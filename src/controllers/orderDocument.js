@@ -24,14 +24,14 @@ const createOrder= async function(req, res){
      if(!product){// check productId present or not in our data base
         res.send('productId is invalid')
     }
-    let pricee=user.balance
+    let userBalance=user.balance
     if(isAppUserFree=="false"){//if isAppUserFree is false so check amount gretar den product
-        if(pricee<amount){
+        if(userBalance<amount){
            return res.send('insufficient balance')
             
         }
-        else {let aa= pricee-amount
-        const decrrese= await userModule.findByIdAndUpdate(userId,{$set:{balance:aa},new:true})
+        else {let newBalance= userBalance-amount
+        const decrrese= await userModule.findByIdAndUpdate(userId,{$set:{balance:newBalance},new:true})
         }
 
     }
