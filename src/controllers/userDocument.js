@@ -1,7 +1,7 @@
 const userModel=require("../models/userDocumentModel")
 
 const createUser= async function(req, res){
-    let acceptHeaderValue = req.headers["isfreeappuser"]
+   // let acceptHeaderValue = req.headers["isfreeappuser"]
     const userData= req.body
     const saveData=await userModel.create(userData)
     
