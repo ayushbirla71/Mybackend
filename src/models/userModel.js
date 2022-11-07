@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema( {
+//////////////////////////~Schema~/////////////////////////
+const userSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     mobile: {
         type: String,
-
         required: true
     },
     emailId: String,
@@ -17,8 +17,9 @@ const userSchema = new mongoose.Schema( {
     age: Number,
     isDeleted: {
         type: Boolean,
-        default:false
+        default: false
     }
 }, { timestamps: true });
 
+///////////////////////////~Modules~////////////////////////
 module.exports = mongoose.model('User', userSchema)

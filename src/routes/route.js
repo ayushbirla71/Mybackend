@@ -3,19 +3,12 @@ const router = express.Router();
 const userController= require("../controllers/userController")
 const middilwear= require("../commonMW/middilwear")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
-
+//////////////////////~Routes~////////////////////
 router.post("/users", userController.createUser  )
-
 router.post("/login", userController.loginUser)
-
-//The userId is sent by front end
 router.get("/users/:userId",middilwear.commonMid, userController.getUserData)
-
 router.put("/users/:userId",middilwear.commonMid, userController.updateUser)
-
 router.delete("/userDeleteAccount/:userId",middilwear.commonMid, userController.DeletUser)
 
+/////////////////////~Module~////////////////////
 module.exports = router;
