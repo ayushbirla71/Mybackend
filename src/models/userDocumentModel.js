@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+/////////////////////////~Schema~///////////////////
 const userDocumentSchema = new mongoose.Schema( {
     Name: String,
     balance:{
@@ -16,7 +17,7 @@ const userDocumentSchema = new mongoose.Schema( {
         type:Boolean,
         default:false
     }
-
 }, { timestamps: true });
 
+//////////////////////////////~Modules~//////////////////////////
 module.exports = mongoose.model('UserDocument', userDocumentSchema) 

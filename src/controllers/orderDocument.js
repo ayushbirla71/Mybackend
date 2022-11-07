@@ -3,16 +3,16 @@ const userModule=require("../models/userDocumentModel")
 const productModule=require("../models/productDocumentModel")
 const {isValidObjectId}=require('mongoose')
 
-
+////////////////////////~CreateOrder~//////////////////////////////
 const createOrder= async function(req, res){
+    try{
     let isAppUserFree=req.isAppUserFree
     const {userId, productId}=req.body
     if(!userId||!productId){
-        return res.send("mendetory field")
+        return res.status(400).send("mendetory field")
     }
     if(!isValidObjectId(userId)||!isValidObjectId(productId)){
-        return res.send("invalid userId and ProductId")
-
+        return res.status(400).send("invalid userId and ProductId")
     }
     const users = await userModule.findById(userId)
     const products = await productModule.findById(productId)
@@ -26,110 +26,44 @@ const createOrder= async function(req, res){
             isAppUserFree:isAppUserFree,
             amount: 0,
             //date: new Date()
-      
         }
         const finalData= await orderModel.create(OrderDetail)
-        return res.send({Order:finalData})
+        return res.status(201).send({Order:finalData})
     }
     else{
         const ProductPrice=products.price
         const userBalance = users.balance
         if(ProductPrice>userBalance){
-            return res.send("insufficient balance")
+            return res.status(402).send("insufficient balance")
         }
-
         const Detail={
             userId:userId,
             productId:productId,
             isAppUserFree:isAppUserFree,
             amount: ProductPrice,
            // date: new Date()
-
         }
         let finalbalance=userBalance-ProductPrice
         const userProfileUptate = await userModule.findByIdAndUpdate(userId,{$set:{balance:finalbalance},new:true})
-       // const userProfileUptate = await userModule.findByIdAndUpdate()
-        return res.send({Order:Detail})
+        return res.status(201).send({Order:Detail})
     }
-
-
-
-    
-
-
 }
-//     const amount=req.body.amount
-    
-//     let isAppUserFree = req.headers["isfreeappuser"]
-//     isAppUserFree = isAppUserFree.toLowerCase()==='true'? true:false ;
-//     const {userId,productId }= req.body
-//     if(!isValidObjectId(userId)||!isValidObjectId(productId)){
-//         return res.send('userId or productId is invalid')
-//     }
-    
-//     if(!userId||!productId){// check userId present or not in req body
-//         res.send('userId or producntId is mandatory')
-//     }
-// //    else if(!productId){// check productId present or not in req body
-// //         res.send('productId mandatory')
-// //     }
-//     const  user=await userModule.findById({_id:userId})
-//      if(!user){// check userId present or not in our data base 
-//        return res.send('user is not found')
-//     } 
-//     const product=await productModule.findById({_id:productId})
-//      if(!product){// check productId present or not in our data base
-//         res.send('product is not found')
-//     }
-//     if(isAppUserFree){
-//         const userdata= {
-//                 userId:userId,
-//                 productId:productId,
-//                 isFreeAppUser:isAppUserFree,
-//                 amount: 0,
-//                 date: Date.now()
-                
-//         }
-//         const fullDataa= await orderModel.create(userdata)
-//         res.send({Data:fullDataa})
-//     }
-//     else{
-//         let userBalance=user.balance
-//         if(userBalance<amount)
-//         const userdata= {
-//             userId:userId,
-//             productId:productId,
-//             isFreeAppUser:isAppUserFree,
-//             amount: ,
-//             date: Date.now()
+catch(error){
+    res.status(500).send({msg:error})
+}
+}
 
-//     }
-    
-//     if(isAppUserFree=="false"){//if isAppUserFree is false so check amount gretar den product
-//         if(userBalance<amount){
-//            return res.send('insufficient balance')
-            
-//         }
-//         else {let newBalance= userBalance-amount
-//         const decrrese= await userModule.findByIdAndUpdate(userId,{$set:{balance:newBalance},new:true})
-//         }
-
-//     }
-
-//     const orderData=req.body
-
-//     // console.log(orderData)
-    
-    
-//     const saveData=await orderModel.create(orderData)
-    
-    
-//     res.send({msg: saveData})
-// }
+/////////////////////////////////~GetOrder~//////////////////////////////
 const getOrder= async function(req, res){
+    try{
     const getData= await orderModel.find().populate('userId').populate('productId')
     res.send({msg:getData})
+    }
+    catch(error){
+        res.status(500).send({msg:error})
+    }
 }
 
+////////////////////////////////~Modules~/////////////////////////////////
 module.exports.createOrder=createOrder
 module.exports.getOrder=getOrder

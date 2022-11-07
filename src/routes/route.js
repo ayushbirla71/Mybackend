@@ -5,17 +5,11 @@ const ProductController=require('../controllers/productDocument')
 const OrderController=require('../controllers/orderDocument')
 const commonMW=require("../middlewares/commonMiddlewares")
 
-
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
-
+/////////////////////////~Api routes~//////////////////////
 router.post("/CreatUserDocument",commonMW.checkIsFreeAppUserOrNot, UserController.createUser)
 router.post("/CreatProductDocument", ProductController.createProduct)
 router.post("/CreatOderDocument",commonMW.checkIsFreeAppUserOrNot,commonMW.chengeAmountOfOrder, OrderController.createOrder)
 router.get("/getOrderData",OrderController.getOrder)
 
-
-
-
+/////////////////////////~Modules~////////////////////////
 module.exports = router;
