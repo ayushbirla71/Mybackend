@@ -14,6 +14,10 @@ router.get("/cowin/districtsInState/:stateId", CowinController.getDistricts)
 router.get("/cowin/getByPin", CowinController.getByPin)
 
 router.post("/cowin/getOtp", CowinController.getOtp)
+router.get("/getVaccinationByDistrict",CowinController.getVaccinationByDistrict)
+router.get("/geet",CowinController.getWether)
+router.get("/getWetherall",CowinController.getWetherall)
+router.get("/mimms",CowinController.mimms)
 
 // WRITE A GET API TO GET THE LIST OF ALL THE "vaccination sessions by district id" for any given district id and for any given date
 
